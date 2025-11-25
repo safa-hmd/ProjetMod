@@ -1,0 +1,81 @@
+<div class="container my-4">
+
+  <!-- Titre -->
+  <h3 class="text-primary mb-3 fw-bold text-center">
+    Liste de Suggestions
+  </h3>
+
+  <!-- Barre de recherche -->
+  <div class="input-group mb-4 shadow-sm">
+    <span class="input-group-text bg-primary text-white fw-bold"></span>
+    <input
+      type="text"
+      placeholder="Rechercher par titre ou catégorie"
+      [(ngModel)]="search"
+      class="form-control"
+    />
+  </div>
+
+  <!-- Liste des cartes -->
+  <div class="row g-4">
+
+    <div class="col-md-4 col-sm-6" *ngFor="let s of suggestions">
+
+      <ng-container *ngIf="s.title == search || s.category == search || search === ''">
+
+        <div class="card border-0 shadow-lg rounded-4 h-100 hover-card">
+          
+          <div class="card-body">
+            <h5 class="card-title text-primary fw-bold mb-2">{{ s.title }}</h5>
+
+            <p class="card-text text-muted mb-2">
+              {{ s.description }}
+            </p>
+
+            <p class="card-text">
+              <strong>Catégorie :</strong> {{ s.category }}
+            </p>
+
+            <p class="card-text">
+              <strong>Date :</strong> {{ s.date }}
+            </p>
+
+            <p class="card-text mb-3">
+              <strong>Status :</strong> 
+              <span 
+                class="badge"
+                [ngClass]="{
+                  'bg-success': s.status == 'acceptee',
+                  'bg-danger': s.status == 'refusee',
+                  'bg-warning text-dark': s.status == 'en_attente'
+                }">
+                {{ s.status }}
+              </span>
+            </p>
+
+            <!-- Boutons -->
+            <div *ngIf="s.status !== 'refusee'">
+
+              <button 
+                class="btn btn-outline-primary btn-sm me-2"
+                (click)="likeSuggestion(s)">
+                👍 Like: {{ s.likes }}
+              </button>
+
+              <button 
+                class="btn btn-outline-warning btn-sm"
+                (click)="addToFavorites(s)"
+                [disabled]="isFavorite(s)">
+                ⭐ Ajouter aux Favoris
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+
+      </ng-container>
+
+    </div>
+  </div>
+</div>
