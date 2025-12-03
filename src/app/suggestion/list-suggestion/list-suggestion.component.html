@@ -59,22 +59,28 @@
               <button 
                 class="btn btn-outline-primary btn-sm me-2"
                 (click)="likeSuggestion(s)">
-                👍 Like: {{ s.likes }}
+                 Like: {{ s.likes }}
               </button>
 
               <button 
                 class="btn btn-outline-warning btn-sm"
                 (click)="addToFavorites(s)"
                 [disabled]="isFavorite(s)">
-                ⭐ Ajouter aux Favoris
+                 Ajouter aux Favoris
               </button>
 
             </div>
+                 <button 
+                class="btn btn-outline-primary btn-sm me-2">
+                 Détails
+              </button>
           </div>
 
         </div>
 
       </ng-container>
+
+        
 
     </div>
   </div>
