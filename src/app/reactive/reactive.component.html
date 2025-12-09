@@ -1,0 +1,36 @@
+<h2>FormControl</h2>
+
+<label>login</label>
+<input type="text" placeholder="login" [formControl]="login">
+<label>password</label>
+<input type="text" placeholder="password" [formControl]="pwd">
+
+<input class="btn btn-info" type="submit" value="save" (click)="save()" [disabled]="login.invalid ||pwd.invalid" >
+
+<h2>FormGroup</h2>
+<form [formGroup]="registerForm">
+
+<label>login</label>
+<input type="text" placeholder="login" formControlName="login">
+<div *ngIf="registerForm.controls['login'].invalid" class="alert alert-danger">
+    <p>login est obligatoire est doit contenir au moins 5 caractéres</p>
+</div>
+
+<label>password</label>
+<input type="text" placeholder="password" formControlName="pwd">
+
+<div *ngIf="registerForm.controls['pwd'].invalid && registerForm.controls['pwd'].touched" class="alert alert-danger">
+    <p>password est obligatoire est doit contenir au moins 8 caractéres</p>
+</div>
+
+<label>email</label>
+<input type="text" placeholder="email" formControlName="login">
+<label>cin</label>
+<input type="text" placeholder="cin" formControlName="pwd">
+<label>telephone</label>
+<input type="text" placeholder="telephone" formControlName="login">
+
+
+<input class="btn btn-info" type="submit" value="save" (click)="save2()" [disabled]="registerForm.invalid" >
+
+</form>

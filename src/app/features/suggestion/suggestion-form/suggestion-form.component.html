@@ -1,0 +1,65 @@
+<div class="container my-4">
+  <div class="card p-4 shadow">
+    <h3 class="text-primary mb-4 fw-bold text-center">Ajouter une Suggestion</h3>
+    
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <!-- Titre -->
+      <div class="mb-3">
+        <label class="form-label fw-bold">Titre :</label>
+        <input class="form-control" formControlName="title" [class.is-invalid]="registerForm.get('title')?.invalid && registerForm.get('title')?.touched">
+        <div class="text-danger" *ngIf="registerForm.get('title')?.invalid && registerForm.get('title')?.touched">
+          <small *ngIf="registerForm.get('title')?.errors?.['required']">Titre obligatoire.</small>
+          <small *ngIf="registerForm.get('title')?.errors?.['minlength']">Minimum 5 caractères.</small>
+          <small *ngIf="registerForm.get('title')?.errors?.['pattern']">Doit commencer par une majuscule et contenir uniquement des lettres.</small>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <label class="form-label fw-bold">Description :</label>
+        <textarea class="form-control" rows="4" formControlName="description" [class.is-invalid]="registerForm.get('description')?.invalid && registerForm.get('description')?.touched"></textarea>
+        <div class="text-danger" *ngIf="registerForm.get('description')?.invalid && registerForm.get('description')?.touched">
+          <small *ngIf="registerForm.get('description')?.errors?.['required']">Description obligatoire.</small>
+          <small *ngIf="registerForm.get('description')?.errors?.['minlength']">Minimum 30 caractères.</small>
+        </div>
+      </div>
+
+      <!-- Catégorie -->
+      <div class="mb-3">
+        <label class="form-label fw-bold">Catégorie :</label>
+        <select class="form-control" formControlName="category" [class.is-invalid]="registerForm.get('category')?.invalid && registerForm.get('category')?.touched">
+          <option value="">-- Sélectionnez une catégorie --</option>
+          <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+        </select>
+        <div class="text-danger" *ngIf="registerForm.get('category')?.invalid && registerForm.get('category')?.touched">
+          <small>Catégorie obligatoire.</small>
+        </div>
+      </div>
+
+      <!-- Date -->
+      <div class="mb-3">
+        <label class="form-label fw-bold">Date :</label>
+        <input class="form-control" formControlName="date" readonly>
+      
+      </div>
+
+      <!-- Status -->
+      <div class="mb-3">
+        <label class="form-label fw-bold">Status :</label>
+        <input class="form-control" formControlName="status" readonly>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button class="btn btn-primary mt-3" type="submit" [disabled]="registerForm.invalid">
+          Soumettre
+        </button>
+        <button class="btn btn-secondary mt-3" type="button" (click)="onCancel()">
+          Annuler
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
